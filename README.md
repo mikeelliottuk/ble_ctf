@@ -19,7 +19,7 @@ For instructions to compile/flash your own firmware or flash the provided pre-co
 Before you can submit flags, you have to discover the Bluetooth MAC address of your device.  Here are a couple example commands to help you find your device:
 
 Discover MAC using hcitool:   
-```` sudo hcitool blescan ````
+```` sudo hcitool lescan ````
 
 Discover MAC using bleah:   
 ```` sudo bleah ````
@@ -28,6 +28,8 @@ Now that you have found your device’s MAC address, you can now communicate wit
 
 Show score with gatttool:  
 ```` gatttool -b de:ad:be:ef:be:f1 --char-read -a 0x002a|awk -F':' '{print $2}'|tr -d ' '|xxd -r -p;printf '\n'  ````
+
+Note that the first part of the command reads a bunch of ASCII from address 0x002a.  The second part simply converts the ASCII to readable text.  You could also paste the ASCII into a decoder such as https://www.rapidtables.com/convert/number/ascii-hex-bin-dec-converter.html.
 
 Show score with bleah:  
 ```` sudo bleah -b "30:ae:a4:20:79:da" -e ````
